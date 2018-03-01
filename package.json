@@ -4,7 +4,7 @@
   "description": "酒店管理系统",
   "main": "index.js",
   "scripts": {
-    "start": "node dev-server.js"
+    "start": "node ./config/dev-server.js"
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,11 @@
     "css-loader": "^0.28.10",
     "element-ui": "^2.2.0",
     "file-loader": "^1.1.10",
+    "http-proxy-middleware": "^0.17.4",
     "jquery": "^3.3.1",
     "style-loader": "^0.20.2",
     "vue": "^2.5.13",
+    "vue-router": "^3.0.1",
     "webpack": "^3.11.0"
   },
   "devDependencies": {

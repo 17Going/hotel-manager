@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
-        common: ['vue', 'element-ui'],
+        common: ['vue', 'vue-router', 'element-ui', 'jquery'],
         app: './src/index.js'
     },
     module:{
