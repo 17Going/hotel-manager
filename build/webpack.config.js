@@ -10,6 +10,9 @@ module.exports = {
     },
     module:{
         rules:[{
+            test: /\.vue$/,
+            use:['vue-loader']
+        },{
             test:/\.css$/,// 加载css
             use:['style-loader', 'css-loader']
         },{

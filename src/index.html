@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><% htmlWebpackPlugin.options.title %></title>
+    <title>
+        <%=htmlWebpackPlugin.options.title %>
+    </title>
 </head>
+
 <body>
     <div id="app">
-        {{ msg }}
+        <el-container>
+            <el-header>
+                <!-- 头部 -->
+                <h2>酒店管理系统</h2>
+            </el-header>
+            <el-container>
+                <!-- 内容区 -->
+                <el-aside>
+                    <!-- 左侧边栏 -->
+                </el-aside>
+                <el-main>
+                    <!-- 内容显示区 -->
+                    <router-view></router-view>
+                </el-main>
+            </el-container>
+            <el-footer>
+                <!-- 底部 -->
+            </el-footer>
+        </el-container>
     </div>
 </body>
 </html>
