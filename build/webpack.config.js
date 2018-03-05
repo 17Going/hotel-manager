@@ -29,6 +29,11 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({ // 抽离公共代码
             name: 'common'
         }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            cookie: 'js-cookie',
+            Vue: 'vue/dist/vue'
+        }),
         new CleanWebpackPlugin(['dist']) //清除dist文件件
     ],
     output:{

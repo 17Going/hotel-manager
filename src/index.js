@@ -14,13 +14,16 @@ var router = new VueRouter({
     routes
 });
 
+cookie.remove('HOTEL_TOKEN'); // TODO暂时添加
 // 设置一个路由全局守卫
 router.beforeEach((to, from, next)=>{
     next();
-    if(false){// 如果鉴权失败，则跳转到登录页面
-
+    if(!cookie.get('HOTEL_TOKEN')){// 如果鉴权失败，则跳转到登录页面
+        router.push('login');
     } else { // 如果已经登录，进入登录页面自动跳转到首页
-
+        if(to.name === 'login') {
+            router.push('home');
+        }
     }
 });
 

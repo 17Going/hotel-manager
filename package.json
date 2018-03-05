@@ -4,7 +4,7 @@
   "description": "酒店管理系统",
   "main": "index.js",
   "scripts": {
-    "start": "node dev-server.js"
+    "start": "node-dev dev-server.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "file-loader": "^1.1.10",
     "http-proxy-middleware": "^0.17.4",
     "jquery": "^3.3.1",
+    "js-cookie": "^2.2.0",
     "style-loader": "^0.20.2",
     "vue": "^2.5.13",
     "vue-loader": "^14.1.1",

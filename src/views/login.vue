@@ -27,11 +27,17 @@ export default {
   },
   methods: {
       login(){
+		  let router = this.$router;
           $.post('/rest/login', {
-              username: this.username,
-              password: this.password
-          }, function(data){
-              console.log(data);
+                username: this.username,
+                password: this.password
+          }, function(succsess){
+                let data = succsess.data,
+					error = succsess.error;
+				if(error.code === '0'){
+					cookie.set('HOTEL_TOKEN', data.token);
+					router.push('home');
+				}
           });
       }
   }
