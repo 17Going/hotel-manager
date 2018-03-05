@@ -1,9 +1,9 @@
-import Vue from 'vue/dist/vue';// 引入完整版
 import VueRouter from 'vue-router';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'; // elementUI依赖的css
 import 'bootstrap/dist/css/bootstrap.css';// 引入bootstrap.css
 import routes from './routes/router';
+import App from './views/app.vue';
 
 
 Vue.use(VueRouter);// 使用插件都需要添加到Vue中去
@@ -15,6 +15,7 @@ var router = new VueRouter({
 });
 
 cookie.remove('HOTEL_TOKEN'); // TODO暂时添加
+
 // 设置一个路由全局守卫
 router.beforeEach((to, from, next)=>{
     next();
@@ -29,5 +30,9 @@ router.beforeEach((to, from, next)=>{
 
 new Vue({
     el: '#app',
-    router // 注册路由
+    router, // 注册路由
+    template: '<App/>',
+    components: {
+        App
+    }
 });
