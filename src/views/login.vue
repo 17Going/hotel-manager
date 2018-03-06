@@ -15,8 +15,23 @@
                         <el-form-item>
                             <el-input type="password" placeholder="请输入密码" v-model="password"></el-input>
                         </el-form-item>
+                        <el-form-item v-if="needVertifycode">
+                            <el-row>
+                                <el-col :span="12">
+                                    <el-input v-model="vertifycode" placeholder="请输入验证码"></el-input>
+                                </el-col>
+                                <el-col :span="12">
+                                    <div id="vertifycode">
+                                        <img :src="vertifycodeURL" @click="updateCode"/>
+                                    </div>
+                                </el-col>
+                            </el-row>
+                        </el-form-item>
                         <el-form-item>
                             <el-button type="primary" :disabled="disable" class="btn-block" @click="login">登录</el-button>
+                        </el-form-item>
+                        <el-form-item>
+                            <a class="pull-right">注册</a>
                         </el-form-item>
                     </el-form>
                 </el-card>
@@ -32,16 +47,16 @@
         return {
             username: '',
             password: '',
+            vertifycodeURL: '/rest/vertifycode', //验证码地址
+            vertifycode: '', // 验证码
+            needVertifycode: false,// 是否需要验证码
             errorInfo: ''
         };
     },
     computed: {
         disable: function(){
-            return this.username ==='' || this.password === ''
+            return this.username ==='' || this.password === '' || (this.needVertifycode && this.vertifycode === '');
         }
-    },
-    watch:{
-
     },
     methods: {
         login(){
@@ -49,7 +64,8 @@
                 router = this.$router;
             $.post('/rest/login', {
                     username: this.username,
-                    password: this.password
+                    password: this.password,
+                    vertifycode: this.vertifycode
             }, function(succsess){
                     let data = succsess.data,
                         error = succsess.error;
@@ -58,8 +74,12 @@
                         router.push('home');
                     } else {
                         self.errorInfo = error.desc;
+                        self.needVertifycode = data.needVertifycode;
                     }
             });
+        },
+        updateCode(){
+            this.vertifycodeURL = '/rest/vertifycode?' + Math.random();
         }
     }
     }
@@ -80,8 +100,19 @@
         color: red;
         height: 20px;
     }
+    .el-form-item:last-child {
+        margin-bottom: 0;
+    }
     #title{
         font-size:20px;
+    }
+    #vertifycode{
+        padding-left:10px;
+    }
+    #vertifycode img{
+        width: 100%;
+        height: 38px;
+        margin-top: -2px;
     }
 </style>
 
