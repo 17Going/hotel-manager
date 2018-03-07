@@ -15,7 +15,7 @@
                         <el-form-item>
                             <el-input type="password" placeholder="请输入密码" v-model="password"></el-input>
                         </el-form-item>
-                        <el-form-item v-if="needVertifycode">
+                        <el-form-item>
                             <el-row>
                                 <el-col :span="12">
                                     <el-input v-model="vertifycode" placeholder="请输入验证码"></el-input>
@@ -31,7 +31,7 @@
                             <el-button type="primary" :disabled="disable" class="btn-block" @click="login">登录</el-button>
                         </el-form-item>
                         <el-form-item>
-                            <a class="pull-right">注册</a>
+                            <a class="pull-right" id="register" @click="register">注册</a>
                         </el-form-item>
                     </el-form>
                 </el-card>
@@ -41,7 +41,6 @@
 </template>
 
 <script>
-    import $ from 'jquery';
     export default {
     data(){
         return {
@@ -49,13 +48,12 @@
             password: '',
             vertifycodeURL: '/rest/vertifycode', //验证码地址
             vertifycode: '', // 验证码
-            needVertifycode: false,// 是否需要验证码
             errorInfo: ''
         };
     },
     computed: {
         disable: function(){
-            return this.username ==='' || this.password === '' || (this.needVertifycode && this.vertifycode === '');
+            return this.username ==='' || this.password === '' || this.vertifycode === '';
         }
     },
     methods: {
@@ -74,18 +72,20 @@
                         router.push('home');
                     } else {
                         self.errorInfo = error.desc;
-                        self.needVertifycode = data.needVertifycode;
                     }
             });
         },
         updateCode(){
             this.vertifycodeURL = '/rest/vertifycode?' + Math.random();
+        },
+        register(){
+            this.$router.push('register');
         }
     }
     }
 </script>
 
-<style>
+<style scoped>
     .el-header{
         background-color: #B3C0D1;
     }
@@ -108,11 +108,16 @@
     }
     #vertifycode{
         padding-left:10px;
+        cursor: pointer;
     }
     #vertifycode img{
         width: 100%;
         height: 38px;
         margin-top: -2px;
+    }
+
+    #register{
+        cursor: pointer;
     }
 </style>
 
